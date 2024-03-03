@@ -13,13 +13,17 @@
 </head>
 
 <body>
-  <p class="notice">
-    <%= notice %>
-  </p>
-  <p class="alert">
-    <%= alert %>
-  </p>
-  <%= yield %>
+  <% if notice.present? && notice.is_a?(String) %>
+    <p class="notice">
+      <%= notice %>
+    </p>
+    <%end%>
+      <% if alert.present? && alert.is_a?(String) %>
+        <p class="alert">
+          <%= alert %>
+        </p>
+        <%end%>
+          <%= yield %>
 </body>
 
 </html>

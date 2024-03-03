@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   #Putting this after the devise routes to give devise precedences
-  resources :users, only: [:show] do
+  resources :users, only: [:show, :index] do
     resources :events, only: [:index] # This will generate a route for showing events associated with a user
   end
   get 'events/index'

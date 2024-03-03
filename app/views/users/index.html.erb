@@ -1,9 +1,9 @@
 <h1>
-    <%= @user.name%>'s Events
+    Hello, <%= @user.name%>
 </h1>
 
 
-<h2>Events</h2>
+<h2>Your Events</h2>
 <% if @user.events.any? %>
     <% @user.events.each do |event| %>
         <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>

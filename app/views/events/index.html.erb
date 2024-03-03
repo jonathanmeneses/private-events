@@ -1,2 +1,21 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<h1>All Events</h1>
+
+<% if @events.any? %>
+    <% @events.each do |event| %>
+        <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+            <div class='event-container'>
+                <h3 class='event-title'>
+                    <%= event.title %>
+                </h3>
+                <h4 class="event-creator">Hosted by: <%=event.creator.name %>
+                </h4>
+                <h4 class='event-location'>Location: <%= event.location %>
+                </h4>
+                <h4 class='event-date'>Date: <%= formatted_date %>
+                </h4>
+                <p class='event-description'>
+                    <%= event.description %>
+                </p>
+            </div>
+            <% end %>
+                <% end %>

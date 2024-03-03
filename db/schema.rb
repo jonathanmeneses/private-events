@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_03_000818) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_183454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "attended_event_id", null: false
+    t.bigint "attendee_id", null: false
+    t.integer "invited_by_id"
+    t.string "status"
+    t.datetime "invited_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attended_event_id", "attendee_id"], name: "index_attendances_on_attended_event_id_and_attendee_id", unique: true
+    t.index ["attended_event_id"], name: "index_attendances_on_attended_event_id"
+    t.index ["attendee_id"], name: "index_attendances_on_attendee_id"
+    t.index ["invited_by_id"], name: "index_attendances_on_invited_by_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.datetime "date"
@@ -38,5 +52,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_000818) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "events", column: "attended_event_id"
+  add_foreign_key "attendances", "users", column: "attendee_id"
+  add_foreign_key "attendances", "users", column: "invited_by_id"
   add_foreign_key "events", "users", column: "creator_id"
 end

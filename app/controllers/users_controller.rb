@@ -1,13 +1,10 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
   def show
     @user = User.find(params[:id])
   end
 
   def index
-    if user_signed_in?
-      @user = current_user
-    else
-      redirect_to sign_in_path
-    end
+    @user = current_user
   end
 end

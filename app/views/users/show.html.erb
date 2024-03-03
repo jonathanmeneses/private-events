@@ -1,0 +1,27 @@
+<h1>Users#show</h1>
+<p>Find me in app/views/users/show.html.erb</p>
+
+<h1>
+    <%= @user.name%>'s Profile
+</h1>
+
+
+<h2>Events</h2>
+<% if @user.events.any? %>
+    <% @user.events.each do |event| %>
+        <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+            <div class='user-event-container'>
+                <h3 class='user-event-title'>
+                    <%= event.title %>
+                </h3>
+                <h4 class='user-event-location'>Location: <%= event.location %>
+                </h4>
+                <h4 class='user-event-date'>Date: <%= formatted_date %>
+                </h4>
+                <p class='user-event-description'>
+                    <%= event.description %>
+                </p>
+            </div>
+            <% end %>
+                <% end %>
+                    <%= link_to 'Back' , root_path %>

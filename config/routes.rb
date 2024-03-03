@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
   get 'events/index'
 
-  resources :events
+  resources :events do
+    resources :attendances, only: [:new, :create, :destroy, :edit, :update]
+  end
 
   root 'events#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

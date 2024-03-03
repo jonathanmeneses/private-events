@@ -1,7 +1,7 @@
 <h1>All Events</h1>
 
 <% if @events.any? %>
-    <% @events.each do |event| %>
+    <% @events.each_with_index do |event, index| %>
         <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
             <div class='event-container'>
                 <h3 class='event-title'>
@@ -13,9 +13,8 @@
                 </h4>
                 <h4 class='event-date'>Date: <%= formatted_date %>
                 </h4>
-                <p class='event-link'>
-                    <%= link_to "See Details" , event_path(event) %>
-                </p>
+                <h4 class="event-rsvp-status">RSVP Status:</h4>
+                <%= link_to "See Details" , event_path(event) %>
             </div>
             <% end %>
                 <% end %>

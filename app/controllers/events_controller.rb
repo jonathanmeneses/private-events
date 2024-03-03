@@ -1,7 +1,9 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+# TODO: Add a view of upcoming events, past events, and invited events
+
   def index
     @events = Event.all
+    @user_attendances = current_user.attendances.where(attended_event_id: @events.pluck(:id)).index_by(&:attended_event_id)
   end
 
   def new
@@ -12,6 +14,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @user_attendance = current_user.attendances.find_by(attended_event_id: params[:id])
   end
 
   def create

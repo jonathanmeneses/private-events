@@ -15,5 +15,13 @@
         <p class='event-description'>
             <%= @event.description %>
         </p>
-        <%= link_to "Go Back" , root_path%>
+        <% if @user_attendance %>
+            <p>RSVP Status: <%= @user_attendance.status %>
+            </p>
+            <%= link_to 'Update RSVP' , edit_event_attendance_path(@event, @user_attendance) %>
+                <% else %>
+                    <%= link_to 'Add RSVP' , new_event_attendance_path(@event) %>
+                        <% end %>
+
+                            <%= link_to "Go Back" , root_path%>
     </div>

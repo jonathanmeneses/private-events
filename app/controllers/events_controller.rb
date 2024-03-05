@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
 # TODO: Add a view of upcoming events, past events, and invited events
 
   def index
@@ -13,7 +14,6 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-    puts event_params
 
     if @event.save
       redirect_to root_path, notice: "Event Successfully Created"
@@ -39,7 +39,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location, :attendee_id)
+    params.require(:event).permit(:title, :description, :date, :location)
   end
 
 end

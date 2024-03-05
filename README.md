@@ -2,7 +2,7 @@
 
 # Overview
 
-This is a private [Eventbrite](https://www.eventbrite.com/) dupe project as part of [The Odin Project](https://www.theodinproject.com)'s Ruby on Rails pathway. 
+This is a private [Eventbrite](https://www.eventbrite.com/) dupe [project](https://www.theodinproject.com/lessons/ruby-on-rails-private-events) as part of [The Odin Project](https://www.theodinproject.com)'s Ruby on Rails pathway. 
 
 # Intent
 The intent of this project is to showcase:

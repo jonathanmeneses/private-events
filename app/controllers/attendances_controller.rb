@@ -5,6 +5,7 @@ class AttendancesController < ApplicationController
 
   def create
     @attendance = @event.attendances.build(attendance_params)
+    @attendance.attendee_id = current_user.id
 
     if @attendance.save
       redirect_to @event, notice: 'You have successfully udpated your attendance.'
@@ -14,17 +15,22 @@ class AttendancesController < ApplicationController
   end
 
   def edit
-
+    @event = Event.find(params[:event_id])
+    @attendance = @event.attendances.find_by(attendee_id: current_user.id)
+    puts @attendance.inspect
   end
 
 
   def new
+
     @event = Event.find(params[:event_id])
     @attendance = @event.attendances.new
+
   end
 
 
   def update
+
     if @attendance.update(attendance_params)
       redirect_to @event, notice: "Attendance successfully updated"
     else

@@ -6,12 +6,6 @@ class EventsController < ApplicationController
     @user_attendances = current_user.attendances.where(attended_event_id: @events.pluck(:id)).index_by(&:attended_event_id)
   end
 
-  def new
-
-    @event = current_user.events.new
-
-  end
-
   def show
     @event = Event.find(params[:id])
     @user_attendance = current_user.attendances.find_by(attended_event_id: params[:id])
@@ -19,6 +13,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
+    puts event_params
 
     if @event.save
       redirect_to root_path, notice: "Event Successfully Created"
@@ -44,7 +39,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location)
+    params.require(:event).permit(:title, :description, :date, :location, :attendee_id)
   end
 
 end

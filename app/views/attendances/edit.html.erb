@@ -2,7 +2,7 @@
     <%= @event.creator.name%>'s Event
 </h1>
 
-<% formatted_date=@event.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+<% formatted_date=@event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
     <div class='event-container'>
         <h3 class='event-title'>
             <%= @event.title %>
@@ -18,3 +18,5 @@
     </div>
 
     <%= render "update_form" %>
+
+        <%= link_to "Home" , root_path%>

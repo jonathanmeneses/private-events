@@ -6,5 +6,11 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
+    user_attendance = Attendance.for_user(@user.id).joins(:attended_event).order('events.date ASC')
+    @future_attendance = user_attendance.future.by_status(["Attending", "maybe"])
+    @past_attendances= user_attendance.past.where.not(status: ["declined",nil]).order('events.date DESC')
+    @declined_attendances = user_attendance.future.by_status(["declined"])
+    @invited_attendances = user_attendance.future.by_status([nil])
+    @past_declined_attendances = user_attendance.past.by_status(["declined",nil]).order('events.date DESC')
   end
 end

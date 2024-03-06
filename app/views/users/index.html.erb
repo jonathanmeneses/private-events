@@ -3,7 +3,7 @@
 </h1>
 
 
-<h2>Your Events</h2>
+<h2>Your Hosted Events</h2>
 <% if @user.created_events.any? %>
     <% @user.created_events.each do |event| %>
         <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
@@ -22,3 +22,15 @@
             <% end %>
                 <% end %>
                     <%= link_to 'Back' , root_path %>
+
+                        <!-- TODO: Update to show correct events by grouping -->
+                        <h3>Upcoming Events</h3>
+                        <% @future_attendances.each do |event|%>
+                            <div class='user-event-container'>
+                                <%= event.attended_event.title %>
+                            </div>
+                            <%end%>
+
+
+
+                                <h3>Past Events</h3>

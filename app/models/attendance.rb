@@ -4,7 +4,7 @@ class Attendance < ApplicationRecord
 
   validates :attendee_id, uniqueness: { scope: :attended_event_id }
 
-  enum status: { attending: 0, not_attending: 1, maybe: 2 }
+  enum status: { attending: 0, declined: 1, maybe: 2 }
 
   validates :status, presence: true
 end

@@ -13,7 +13,11 @@
                 </h4>
                 <h4 class='event-date'>Date: <%= formatted_date %>
                 </h4>
-                <h4 class="event-rsvp-status">RSVP Status:</h4>
+                <h4 class="event-rsvp-status">RSVP Status: <%=
+                        humanize_attendance_status(@user_attendances[event.id]&.status) || "No Status" %>
+                </h4>
+                </h4>
+
                 <%= link_to "See Details" , event_path(event) %>
             </div>
             <% end %>

@@ -6,6 +6,13 @@ TODO: Start on Event attendance
 
 TODO: Add a flag for public events
 
+TODO: On events that i can see, show # of attendees. 
+
+TODO: On my events, show attendee breakdown
+
+TODO: Add an admin header
+
+
 -->
 For attendnace:
 

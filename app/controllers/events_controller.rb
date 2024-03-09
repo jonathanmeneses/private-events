@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @user_attendance = current_user.attendances.find_by(attended_event_id: params[:id])
+    @attendees = @event.attendances
   end
 
   def create
@@ -30,10 +31,14 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
-    if @event.update(event_params)
-      redirect_to root_path, notice: "Event Successfully Updated"
+    if current_user.id == @event.user_id
+      if @event.update(event_params)
+        redirect_to root_path, notice: "Event Successfully Updated"
+      else
+        render :edit, status: :unprocessable_entity
+      end
     else
-      render :edit, status: :unprocessable_entity
+      redirect_to root_path, alert: "You are not authorized to update this event"
     end
   end
 

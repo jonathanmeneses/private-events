@@ -1,1 +1,5 @@
-<%= render "form" %>
+<% if current_user.id == @event.creator_id %>
+  <%= render "form" %>
+<% else %>
+  <p>You are not authorized to edit this event.</p>
+<% end %>

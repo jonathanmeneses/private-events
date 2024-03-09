@@ -8,7 +8,6 @@
     <%= render partial: 'users/event' , locals: {event: event, formatted_date: formatted_date} %>
   <% end %>
 <% end %>
-<%= link_to 'Back' , root_path %>
 <!-- TODO: Update to show correct events by grouping -->
 <h2>Upcoming Events</h2>
 <% @future_attendances.each do |event|%>
@@ -24,3 +23,4 @@
     <%= render partial: 'users/event', locals: {event: event.attended_event, formatted_date: formatted_date}%>
   <%end%>
 <%end%>
+<%= link_to 'Back' , root_path %>

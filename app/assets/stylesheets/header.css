@@ -9,10 +9,12 @@
     padding: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .nav-item {
     margin-right: 10px;
+
 }
 
 .nav-link {
@@ -24,4 +26,20 @@
 .nav-link:hover {
     background-color: #ddd;
     color: black;
+}
+
+.nav-grouping {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+}
+
+.nav-button {
+    border: 0px;
+    background-color: transparent;
+}
+
+.nav-grouping form {
+    display: flex;
+    align-items: center;
 }

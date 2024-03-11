@@ -2,8 +2,8 @@
   <%= @user.name%>'s Events
 </h1>
 <h2>Events</h2>
-<% if @user.created_events.any? %>
-  <% @user.created_events.each do |event| %>
+<% if @user_events_invited_current_user.any? %>
+  <% @user_events_invited_current_user.each do |event| %>
     <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
     <div class='user-event-container'>
       <h3 class='user-event-title'>
@@ -17,7 +17,7 @@
         <%= event.description %>
       </p>
       <% if @user == current_user %>
-        <p> Hello world </p>
+        <%= link_to edit_event_path%>
       <%end%>
     </div>
   <% end %>

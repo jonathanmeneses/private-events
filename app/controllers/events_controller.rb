@@ -13,8 +13,12 @@ class EventsController < ApplicationController
     @attendees = @event.attendances
   end
 
+  def new
+    @event = Event.new
+  end
+
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
       redirect_to root_path, notice: "Event Successfully Created"
@@ -44,7 +48,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:title, :description, :date, :location)
+    params.require(:event).permit(:title, :description, :date, :location, :invite_only)
   end
 
 end

@@ -12,5 +12,6 @@
   </p>
   <% if current_user = event.creator%>
     <%= link_to "Edit Event" , edit_event_path(event) %>
+    <%= link_to "Invite Guests", new_event_attendance_path(event)%>
   <%end%>
 </div>

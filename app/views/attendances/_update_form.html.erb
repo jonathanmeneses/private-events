@@ -12,13 +12,24 @@
     </ul>
   </div>
 <% end %>
-<%= form_with model: [@event, @attendance], local: true do |form| %>
-  invited date: <%= @attendance.invited_date %>
-  invited by:
-  <%= form.label :status %><br>
-  <%= form.select :status, Attendance.statuses.keys.map { |status| [status.titleize, status] }, {
+<% if @event.creator == current_user%>
+  <%= form_with model: [@event, @attendance], local: true do |form| %>
+    <%= form.label :guest %><br>
+    <%= form.select :guest,<%= form.select :guest, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).map { |status| [status.titleize, status] }, {
                         include_blank: true } %>
-  <%= form.label :comment %>
-  <%= form.text_field :comment %>
-  <%= form.submit "Submit" %>
-<% end %>
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+    <%= form.submit "Submit" %>
+  <% end %>
+<%else%>
+  <%= form_with model: [@event, @attendance], local: true do |form| %>
+    invited date: <%= @attendance.invited_date %>
+    invited by:
+    <%= form.label :status %><br>
+    <%= form.select :status, Attendance.statuses.keys.map { |status| [status.titleize, status] }, {
+                        include_blank: true } %>
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+    <%= form.submit "Submit" %>
+  <% end %>
+<%end%>

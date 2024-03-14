@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event
+  before_action :set_event, except: [:index]
   before_action :set_attendance, only: [:edit, :update]
 
   def create
@@ -41,6 +41,10 @@ class AttendancesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def index
+    @attendances = current_user.attendances
   end
 
   private

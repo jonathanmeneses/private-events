@@ -15,7 +15,7 @@
 <% if @event.creator == current_user%>
   <%= form_with model: [@event, @attendance], local: true do |form| %>
     <%= form.label :attendee_id %><br>
-    <%= form.select :attendee_id, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).map { |user| [user.name, user.id] }, { include_blank: false } %>
+    <%= form.select :attendee_id, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).where.not(id: current_user.id).map { |user| [user.name, user.id] }, { include_blank: false } %>
     <%= form.submit "Invite" %>
   <% end %>
 <%else%>

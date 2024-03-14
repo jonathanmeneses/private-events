@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     resources :attendances, only: [:new, :create, :destroy, :edit, :update]
   end
 
+  resources :attendances, only: [:index]
+
+
   root 'events#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

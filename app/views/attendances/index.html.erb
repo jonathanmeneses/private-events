@@ -1,0 +1,6 @@
+<% if @attendances.any? %>
+  <% @attendances.each do |attendance|  %>
+    <%# TODO: Udpate this to actually format and show the events that I am either invited to or attending%>
+    <%= attendance.attended_event.title%>
+  <%end%>
+<%end%>

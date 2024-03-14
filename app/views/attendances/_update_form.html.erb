@@ -14,12 +14,9 @@
 <% end %>
 <% if @event.creator == current_user%>
   <%= form_with model: [@event, @attendance], local: true do |form| %>
-    <%= form.label :guest %><br>
-    <%= form.select :guest,<%= form.select :guest, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).map { |status| [status.titleize, status] }, {
-                        include_blank: true } %>
-    <%= form.label :comment %>
-    <%= form.text_field :comment %>
-    <%= form.submit "Submit" %>
+    <%= form.label :attendee_id %><br>
+    <%= form.select :attendee_id, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).map { |user| [user.name, user.id] }, { include_blank: false } %>
+    <%= form.submit "Invite" %>
   <% end %>
 <%else%>
   <%= form_with model: [@event, @attendance], local: true do |form| %>

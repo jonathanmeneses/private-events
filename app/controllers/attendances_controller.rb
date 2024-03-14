@@ -5,12 +5,17 @@ class AttendancesController < ApplicationController
 
   def create
     @attendance = @event.attendances.build(attendance_params)
-    @attendance.attendee_id = current_user.id
+    if @event.creator == current_user
+      @attendance.invited_by_id = current_user.id
+      @attendance.invited_date = Date.today
+    else
+      @attendance.attendee_id = current_user.id
+    end
 
     if @attendance.save
-      redirect_to @event, notice: 'You have successfully udpated your attendance.'
+      redirect_to @event, notice: attendance_notice_message
     else
-      redirect_to @event, alert: 'Could not register your attendance.'
+      redirect_to @event, alert: attendance_alert_message
     end
   end
 
@@ -50,6 +55,22 @@ class AttendancesController < ApplicationController
 
   def attendance_params
     params.require(:attendance).permit(:attendee_id, :status, :comment)
+  end
+
+  def attendance_notice_message
+    if @attendance.invited_by_id.present?
+      'You have successfully invited a guest to the event.'
+    else
+      'You have successfully updated your attendance.'
+    end
+  end
+
+  def attendance_alert_message
+    if @attendance.invited_by_id.present?
+      'Could not invite guest.'
+    else
+      'Could not register your attendance.'
+    end
   end
 
 

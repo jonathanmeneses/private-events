@@ -11,7 +11,7 @@
     <%= event.attended_event.description %>
   </p>
   <% if event.invited_by_id %>
-    <h4>Invited by: <%= Users.find(event.invited_by_id).name %></h4>
+    <h4>Invited by: <%= User.find(event.invited_by_id).name %></h4>
   <%end%>
   <h4>RSVP Status: <%=humanize_attendance_status(event.status || "No Response")%></h4>
   <h4>Response date: <%=event.updated_at%></h4>

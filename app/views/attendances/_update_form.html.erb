@@ -15,13 +15,20 @@
 <% if @event.creator == current_user%>
   <%= form_with model: [@event, @attendance], local: true do |form| %>
     <%= form.label :attendee_id %><br>
+    <%# Note: This is removing the current_user from the invite functionality. 
+    In the future, we'll want to accommodate users to be able to RSVP to their own events, but not
+    invite themselves to an event. I'm not really worried about this for a side project. %>
     <%= form.select :attendee_id, User.where.not(id: Attendance.select(:attendee_id).where(attended_event_id: @event.id)).where.not(id: current_user.id).map { |user| [user.name, user.id] }, { include_blank: false } %>
     <%= form.submit "Invite" %>
   <% end %>
 <%else%>
   <%= form_with model: [@event, @attendance], local: true do |form| %>
-    invited date: <%= @attendance.invited_date %>
-    invited by:
+    <% if @attendance.invited_by_id%>
+      <h4>invited date: <%= @attendance.invited_date %></h4>
+      <h4>invited by:  <%= User.find(@attendance.invited_by_id).name%></h4>
+    <%else%>
+      <h4>Open Invitation</h4>
+    <%end%>
     <%= form.label :status %><br>
     <%= form.select :status, Attendance.statuses.keys.map { |status| [status.titleize, status] }, {
                         include_blank: true } %>

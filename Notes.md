@@ -1,12 +1,8 @@
 <!-- 
 
-TODO: Add Devise views and name to the relevant sign up and update account views  
-
 TODO: On events that i can see, show # of attendees. 
 
 TODO: On my events, show attendee breakdown
-
-TODO: Add an admin header
 
 
 -->

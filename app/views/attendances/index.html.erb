@@ -7,8 +7,11 @@
     <h3>Location: <%=attendance.attended_event.location %></h3>
     <h4>Description</h4>
     <p><%=attendance.attended_event.description%></p>
-    <h4>Invited by: <%=User.find(attendance.invited_by_id).name %> on <%=attendance.invited_date.to_date %></h4>
-    <div><strong>Your RSVP Status:</strong> <%= link_to humanize_attendance_status(attendance.status), attendance.status ? edit_event_attendance_path(attendance.attended_event,attendance) : new_event_attendance_path(attendance.attended_event) %></div>
+    <%if attendance.invited_by_id %>
+      <h4>Invited by: <%=User.find(attendance.invited_by_id).name %> on <%=attendance.invited_date.to_date %></h4>
+    <%end%>
+    <div><strong>Your RSVP Status:</strong> <%= link_to humanize_attendance_status(attendance.status), 
+    edit_event_attendance_path(attendance.attended_event,attendance)  %></div>
   <%end%>
 <%end%>
 <%# What do I want to show?  %>

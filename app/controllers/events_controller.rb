@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-# TODO: Add a view of upcoming events, past events, and invited events
 
   def index
     @events = Event.all

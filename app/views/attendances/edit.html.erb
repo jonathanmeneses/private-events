@@ -1,0 +1,21 @@
+<h1>
+  <%= @event.creator.name%>'s Event
+</h1>
+<% formatted_date=@event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+<div class='event-container'>
+  <h3 class='event-title'>
+    <%= @event.title %>
+  </h3>
+</h4>
+<h4 class='event-location'>Location: <%= @event.location %>
+</h4>
+<h4 class='event-date'>Date: <%= formatted_date %>
+</h4>
+<p class='event-description'>
+  <%= @event.description %>
+</p>
+</div>
+<%= render "update_form" %>
+<%# TODO (FUTURE): Update to accommodate users adding RSVPs to their own events? %>
+<%= link_to "Home" , root_path%>
+<%= link_to 'Back', :back %>

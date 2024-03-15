@@ -1,0 +1,26 @@
+<h1>
+  Hello, <%= @user.name%>
+</h1>
+<h2>Your Hosted Events</h2>
+<% if @user.created_events.future.any? %>
+  <% @user.created_events.future.order(date: :asc).each do |event| %>
+    <% formatted_date=event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+    <%= render partial: 'users/event' , locals: {event: event, formatted_date: formatted_date} %>
+  <% end %>
+<% end %>
+<!-- TODO: Update to show correct events by grouping -->
+<h2>Upcoming Events</h2>
+<% @future_attendances.each do |event|%>
+  <% formatted_date=event.attended_event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+  <div class='user-event-container'>
+    <%= render partial: 'users/event_attendance', locals: {event: event, formatted_date: formatted_date} %>
+  </div>
+<%end%>
+<h2>Past Events</h2>
+<%if @past_attendances.any? %>
+  <% @past_attendances.each do |event|%>
+    <% formatted_date=event.attended_event.date.strftime("%A, %B %-d, %Y, at (%H:%M)") %>
+    <%= render partial: 'users/event', locals: {event: event.attended_event, formatted_date: formatted_date}%>
+  <%end%>
+<%end%>
+<%= link_to 'Back', :back %>

@@ -1,0 +1,7 @@
+<% @event.attendances.order(status: :asc, updated_at: :desc).each do |attendance| %>
+  <div>
+    <h3><%= attendance.attendee.name %></h3>
+    <p>Status: <%= humanize_attendance_status attendance.status %></p>
+  </div>
+<% end %>
+<%= link_to "Back", :back %>
